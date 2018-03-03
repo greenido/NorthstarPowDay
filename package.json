@@ -4,7 +4,7 @@
 	"//3": "updating this file will download and update your packages",
 	"name": "crusted-butte-powder-day-app",
 	"version": "0.1.1",
-	"description": "Action on google to know if it's a powder day at CB",
+	"description": "Action on google to know if it's a powder day at Northstar at Tahoe",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js"
@@ -24,7 +24,7 @@
 	"engines": {
 		"node": "6.9.1"
 	},
-  "repository" : "https://github.com/greenido/todo",
+  "repository" : "https://github.com/greenido/NorthstarPowDay",
   "license" : "SEE LICENSE IN LICENSE.md",
 	"keywords": [
 		"node",
