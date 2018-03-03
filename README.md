@@ -1,5 +1,5 @@
 # Is it a powder day at Northstar At Tahoe?
-![](https://cdn.glitch.com/77226634-c4ec-49b2-91d1-afa454bc1adb%2F300px-Crested_Butte.jpg?1519855661465)
+![](https://cdn.glitch.com/f6cc1bf3-90a1-45e9-9d2e-fd165b25be5e%2FScreenshot%202018-03-02%2020.11.41.png?1520050328584)
 ### Actions on Google to know if it's a powder day at Northstar At Tahoe and you should run to the mountain.
 
 ## [live demo](https://pow-day-northstar.glitch.me/)
