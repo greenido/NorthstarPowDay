@@ -2,7 +2,8 @@
 ![](https://cdn.glitch.com/f6cc1bf3-90a1-45e9-9d2e-fd165b25be5e%2FScreenshot%202018-03-02%2020.11.41.png?1520050328584)
 ### Actions on Google to know if it's a powder day at Northstar At Tahoe and you should run to the mountain.
 
-## [live demo](https://pow-day-northstar.glitch.me/)
+* The [Northstar Pow Day Action on Google](https://assistant.google.com/services/a/uid/0000008b93c73c1c?hl=en)
+* The Web [live demo](https://pow-day-northstar.glitch.me/)
     
 ### Project Details
 
