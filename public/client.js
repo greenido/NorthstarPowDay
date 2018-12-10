@@ -8,4 +8,10 @@ $(function() {
   
   //var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
   
+  $.get( "/snow/", function( data ) {
+    //$( ".result" ).html( data );
+    console.log( "Got: " + data );
+    $("#snowInfo").html("<h2>" + data + "</h2>");
+  });
+  
 });

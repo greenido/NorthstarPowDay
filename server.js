@@ -18,6 +18,7 @@ const express = require('express');
 const ApiAiAssistant = require('actions-on-google').ApiAiAssistant;
 const bodyParser = require('body-parser');
 const request = require('request');
+const rp = require('request-promise')
 const app = express();
 const Map = require('es6-map');
 const dateJS = require('./dateLib.js');
@@ -29,9 +30,62 @@ const toSentence = require('underscore.string/toSentence');
 app.use(bodyParser.json({type: 'application/json'}));
 app.use(express.static('public'));
 
+//
 // http://expressjs.com/en/starter/basic-routing.html
+//
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
+});
+
+//
+//
+//
+app.get("/snow/", function (request, response) {
+   //res.setHeader('Content-Type', 'application/json');
+  console.log('** /snow/ --> getSnowConditions **');
+  rp('https://www.onthesnow.com/california/northstar-california/skireport.html')
+    .then(function (body) {
+        // Process html...
+        let html = body; 
+        let inx1 = html.indexOf('Last Updated:') + 24;
+        let inx2 = html.indexOf('>', inx1) + 1; // we got 2 > to skip
+        let inx3 = html.indexOf('<', inx2); 
+        let lastUpdate = html.substring(inx2, inx3).trim();
+        console.log("== lastUpdate: " + lastUpdate);
+
+        inx3 = html.indexOf('Today<br>', inx3) + 9;
+        let inx4 = html.indexOf('bluePill', inx3) + 10;
+        let inx44 = html.indexOf('"<', inx4);
+        let snowToday = html.substring(inx4, inx44).trim();
+
+        // upper mountain conditions
+        let inx5 = html.indexOf('<p>Upper:</p>');
+        let inx6 = html.indexOf('bluePill', inx5) + 10;
+        let inx7 = html.indexOf('"<', inx6);
+        let upperSnow = html.substring(inx6, inx7).trim();
+
+        // lower mountain conditions
+        let inx5l = html.indexOf('<p>Lower:</p>');
+        let inx6l = html.indexOf('bluePill', inx5l) + 10;
+        let inx7l = html.indexOf('"<', inx6l);
+        let lowerSnow = html.substring(inx6l, inx7l).trim();
+
+        console.log("=*= lastUpdate: " + lastUpdate + " | snowToday: " + snowToday + " upperSnow: " + upperSnow +" lowerSnow: " + lowerSnow);
+
+        if (snowToday == null || snowToday.length < 1) {
+          console.log("Could not find if there is powder today");
+          response.send("Could not find if there is powder today");
+        }
+
+        let res = "Today at Northstar we got " + snowToday + " inch of snow. In the upper mountain we have " +
+          upperSnow + " inch and in the lower moutain there are " + lowerSnow + " inch. Have an amazing day and be safe!"; // all this information was last updated at " + lastUpdate + 
+        response.send(res);
+    })
+    .catch(function (err) {
+      var errStr = "Error occurred. Err: " + JSON.stringify(err);
+      console.log(errStr);
+      //response.send("Error occurred. Err: " + JSON.stringify(err));
+    });
 });
 
 // Calling GA to make sure how many invocations we had on this skill
@@ -110,10 +164,8 @@ app.post('/', function(req, res, next) {
   //
   // Create functions to handle intents here
   //
-  function getNextFlightInfo(assistant) {
-    
+  function getSnowInfo(assistant) {
     console.log('** Handling action: ' + KEYWORD_ACTION );
-
     request({ method: 'GET',
              url:'https://www.onthesnow.com/california/northstar-california/skireport.html'},
             function (err, response, body) {
@@ -169,7 +221,7 @@ app.post('/', function(req, res, next) {
   // Add handler functions to the action router.
   //
   let actionRouter = new Map();
-  actionRouter.set(KEYWORD_ACTION, getNextFlightInfo);
+  actionRouter.set(KEYWORD_ACTION, getSnowInfo);
   
   // Route requests to the proper handler functions via the action router.
   assistant.handleRequest(actionRouter);
@@ -190,7 +242,6 @@ function logObject(message, object, options) {
   console.log(message);
   //console.log(prettyjson.render(object, options));
 }
-
 
 //
 // Listen for requests -- Start the party
