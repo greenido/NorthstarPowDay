@@ -46,10 +46,14 @@ app.get("/snow/", function (request, response) {
     .then(function (body) {
         // Process html...
         let html = body; 
-        let inx1 = html.indexOf('Last Updated:') + 24;
+        let inx1 = html.indexOf('lastUpdated') + 11;
         let inx2 = html.indexOf('>', inx1) + 1; // we got 2 > to skip
         let inx3 = html.indexOf('<', inx2); 
         let lastUpdate = html.substring(inx2, inx3).trim();
+        let lastUpdateStr = "";
+        if (lastUpdate != null && lastUpdate.length > 2) {
+          lastUpdateStr = "<br><small>( " + lastUpdate + " )</small>";
+        }
         console.log("== lastUpdate: " + lastUpdate);
 
         inx3 = html.indexOf('Today<br>', inx3) + 9;
@@ -77,13 +81,12 @@ app.get("/snow/", function (request, response) {
         }
 
         let res = "Today at Northstar we got " + snowToday + " inch of snow. In the upper mountain we have " +
-          upperSnow + " inch and in the lower moutain there are " + lowerSnow + " inch. Have an amazing day and be safe!"; // all this information was last updated at " + lastUpdate + 
+          upperSnow + " inch and in the lower moutain there are " + lowerSnow + " inch. " + lastUpdateStr;
         response.send(res);
     })
     .catch(function (err) {
       var errStr = "Error occurred. Err: " + JSON.stringify(err);
       console.log(errStr);
-      //response.send("Error occurred. Err: " + JSON.stringify(err));
     });
 });
 
@@ -175,7 +178,7 @@ app.post('/', function(req, res, next) {
         }
         try {  
           let html = response.body; 
-          let inx1 = html.indexOf('Last Updated:') + 24;
+          let inx1 = html.indexOf('lastUpdated') + 11;
           let inx2 = html.indexOf('>', inx1) + 1; // we got 2 > to skip
           let inx3 = html.indexOf('<', inx2); 
           let lastUpdate = html.substring(inx2, inx3).trim();
@@ -206,8 +209,7 @@ app.post('/', function(req, res, next) {
           }
           
           let res = "Today at Northstar we got " + snowToday + " inch of snow. In the upper mountain we have " +
-            upperSnow + " inch and in the lower moutain there are " + lowerSnow + " inch. Have an amazing day and be safe!"; // all this information was last updated at " + lastUpdate + 
-           // 'tell' (and not 'ask') as we don't wish to finish the conversation
+            upperSnow + " inch and in the lower moutain there are " + lowerSnow + " inch. Have an amazing day and be safe!"; 
           assistant.tell(res);
         }
         catch(error) {
