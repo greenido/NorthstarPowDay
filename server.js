@@ -3,15 +3,14 @@
 //
 // @author: Ido Green | @greenido
 // @date: March 2018
-// @last update: March 2018
+// @last update: Nov 2018
 //
 // @see:
-// source for date: view-source:https://www.northstarcalifornia.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx
+// source for data: view-source:https://www.northstarcalifornia.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx
 //
 // https://github.com/greenido/bitcoin-info-action
 // http://expressjs.com/en/starter/static-files.html
 // http://www.datejs.com/
-//
 //
 // init project pkgs
 const express = require('express');
@@ -38,7 +37,7 @@ app.get("/", function (request, response) {
 });
 
 //
-//
+// proxy to our web UI
 //
 app.get("/snow/", function (request, response) {
    //res.setHeader('Content-Type', 'application/json');
