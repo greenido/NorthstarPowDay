@@ -52,7 +52,7 @@ app.get("/snow/", function (request, response) {
         let lastUpdate = html.substring(inx2, inx3).trim();
         let lastUpdateStr = "";
         if (lastUpdate != null && lastUpdate.length > 2) {
-          lastUpdateStr = "<br><small>( " + lastUpdate + " )</small>";
+          lastUpdateStr = "<br><small>( Updated: " + lastUpdate + " )</small>";
         }
         console.log("== lastUpdate: " + lastUpdate);
 
@@ -73,15 +73,15 @@ app.get("/snow/", function (request, response) {
         let inx7l = html.indexOf('"<', inx6l);
         let lowerSnow = html.substring(inx6l, inx7l).trim();
 
-        console.log("=*= lastUpdate: " + lastUpdate + " | snowToday: " + snowToday + " upperSnow: " + upperSnow +" lowerSnow: " + lowerSnow);
+        console.log("🏔 lastUpdate: " + lastUpdate + " | snowToday: " + snowToday + " upperSnow: " + upperSnow +" lowerSnow: " + lowerSnow);
 
         if (snowToday == null || snowToday.length < 1) {
           console.log("Could not find if there is powder today");
           response.send("Could not find if there is powder today");
         }
 
-        let res = "Today at Northstar we got " + snowToday + " inch of snow. In the upper mountain we have " +
-          upperSnow + " inch and in the lower moutain there are " + lowerSnow + " inch. " + lastUpdateStr;
+        let res = "❄️ Today at Northstar we got " + snowToday + " inch of snow.<br>🏔 In the upper mountain: " +
+          upperSnow + " inch <br>⛰ In the lower: " + lowerSnow + " inch. " + lastUpdateStr;
         response.send(res);
     })
     .catch(function (err) {
