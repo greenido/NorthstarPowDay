@@ -7,17 +7,17 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.16.4",
-    "actions-on-google": "^1.0.4",
+    "actions-on-google": "^1.11.0",
     "body-parser": "^1.19.0",
+    "es6-map": "^0.1.5",
+    "express": "^4.17.1",
+    "prettyjson": "^1.2.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "es6-map": "^0.1.5",
-    "prettyjson": "^1.2.1",
-    "underscore.string": "^3.3.5",
-    "wikipedia-js": "^0.0.6",
+    "sequelize": "^6.0.0",
     "sqlite3": "^4.1.0",
-    "sequelize": "^6.0.0"
+    "underscore.string": "^3.3.5",
+    "wikipedia-js": "0.0.6"
   },
   "engines": {
     "node": "10.14.1"
