@@ -44,7 +44,7 @@ app.get("/snow/", function (request, response) {
   console.log('** /snow/ --> getSnowConditions **');
   rp('https://www.onthesnow.com/california/northstar-california/skireport.html')
     .then(function (body) {
-        // Process html...
+        // Process html
         let html = body; 
         let inx1 = html.indexOf('lastUpdated') + 11;
         let inx2 = html.indexOf('>', inx1) + 1; // we got 2 > to skip
@@ -80,8 +80,8 @@ app.get("/snow/", function (request, response) {
           response.send("Could not find if there is powder today");
         }
 
-        let res = "❄️ Today at Northstar we got " + snowToday + " inch of snow.<br>🏔 In the upper mountain: " +
-          upperSnow + " inch <br>⛰ In the lower: " + lowerSnow + " inch. " + lastUpdateStr;
+        let res = "❄️ Today at Northstar we got " + snowToday + " inch of snow ❄️<br>In the upper 🏔 " +
+          upperSnow + " inch.<br>In the lower ⛰ " + lowerSnow + " inch. " + lastUpdateStr;
         response.send(res);
     })
     .catch(function (err) {
