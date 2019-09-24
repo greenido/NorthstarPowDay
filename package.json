@@ -1,34 +1,34 @@
 {
-	"name": "northstar-powder-day-app",
-	"version": "0.1.2",
-	"description": "Action on google to know if it's a powder day at Northstar at Tahoe",
-	"main": "server.js",
-	"scripts": {
-		"start": "node server.js"
-	},
-	"dependencies": {
-		"express": "^4.14.0",
-		"actions-on-google": "^1.0.4",
-		"body-parser": "^1.15.2",
-		"request": "^2.79.0",
-		"request-promise": "^1.0.0",
-		"es6-map": "^0.1.4",
-		"prettyjson": "^1.2.1",
-		"underscore.string": "^3.3.4",
-		"wikipedia-js": "^0.0.6",
-		"sqlite3": "*",
-		"sequelize": "*"
-	},
-	"engines": {
-		"node": "10.14.1"
-	},
-	"repository": "https://github.com/greenido/NorthstarPowDay",
-	"license": "SEE LICENSE IN LICENSE.md",
-	"keywords": [
-		"node",
-		"aog",
-		"actions-on-google",
-		"express",
-		"sqlite3"
-	]
+  "name": "northstar-powder-day-app",
+  "version": "0.1.2",
+  "description": "Action on google to know if it's a powder day at Northstar at Tahoe",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "actions-on-google": "^1.0.4",
+    "body-parser": "^1.19.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "es6-map": "^0.1.5",
+    "prettyjson": "^1.2.1",
+    "underscore.string": "^3.3.5",
+    "wikipedia-js": "^0.0.6",
+    "sqlite3": "^4.1.0",
+    "sequelize": "^6.0.0"
+  },
+  "engines": {
+    "node": "10.14.1"
+  },
+  "repository": "https://github.com/greenido/NorthstarPowDay",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "keywords": [
+    "node",
+    "aog",
+    "actions-on-google",
+    "express",
+    "sqlite3"
+  ]
 }
