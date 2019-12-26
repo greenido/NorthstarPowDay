@@ -3,7 +3,7 @@
 //
 // @author: Ido Green | @greenido
 // @date: March 2018
-// @last update: Nov 2018
+// @last update: Dec 2019
 //
 // @see:
 // source for data: view-source:https://www.northstarcalifornia.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx
@@ -14,7 +14,7 @@
 //
 // init project pkgs
 const express = require('express');
-const ApiAiAssistant = require('actions-on-google').ApiAiAssistant;
+const ApiAiAssistant = require('actions-on-google').DialogflowApp;
 const bodyParser = require('body-parser');
 const request = require('request');
 const rp = require('request-promise')
@@ -30,11 +30,16 @@ app.use(bodyParser.json({type: 'application/json'}));
 app.use(express.static('public'));
 
 //
-// http://expressjs.com/en/starter/basic-routing.html
+// http://expressjs.com/en/starter/basic-routing.html  
 //
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
+
+// Add a health check route in express
+app.get('/_health', (req, res) => {
+  res.status(200).send('ok 🥇');
+})
 
 //
 // proxy to our web UI
@@ -68,12 +73,13 @@ app.get("/snow/", function (request, response) {
         let upperSnow = html.substring(inx6, inx7).trim();
 
         // lower mountain conditions
-        let inx5l = html.indexOf('<p>Lower:</p>');
+        let inx5l = html.indexOf('<p>Middle:</p>');
         let inx6l = html.indexOf('bluePill', inx5l) + 10;
-        let inx7l = html.indexOf('"<', inx6l);
+        let inx7l = html.indexOf('<', inx6l);
         let lowerSnow = html.substring(inx6l, inx7l).trim();
 
-        console.log("🏔 lastUpdate: " + lastUpdate + " | snowToday: " + snowToday + " upperSnow: " + upperSnow +" lowerSnow: " + lowerSnow);
+        console.log("🏔 lastUpdate: " + lastUpdate + " | snowToday: " + snowToday +
+                    " upperSnow: " + upperSnow +" lowerSnow: " + lowerSnow);
 
         if (snowToday == null || snowToday.length < 1) {
           console.log("Could not find if there is powder today");
@@ -81,7 +87,7 @@ app.get("/snow/", function (request, response) {
         }
 
         let res = "❄️ Today at Northstar we got " + snowToday + " inch of snow ❄️<br>In the upper 🏔 " +
-          upperSnow + " inch.<br>In the lower ⛰ " + lowerSnow + " inch. " + lastUpdateStr;
+          upperSnow + "\"<br>In the middle ⛰ " + lowerSnow + " <small>" + lastUpdateStr;
         response.send(res);
     })
     .catch(function (err) {
