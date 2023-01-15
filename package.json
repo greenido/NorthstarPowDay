@@ -1,7 +1,7 @@
 {
   "name": "northstar-powder-day-app",
   "version": "0.1.5",
-  "description": "Is a powder day at Northstar at Tahoe?!",
+  "description": "Is a powder day at Northstar at Tahoe",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
